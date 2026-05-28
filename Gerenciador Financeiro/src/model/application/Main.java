@@ -79,7 +79,7 @@ public class Main {
             }
 
             if (indexProcurado) {
-                System.out.println("Gasto(s) '" + nomeProcurado + "' removido(s) com sucesso!");
+                System.out.println("Gasto '" + nomeProcurado + "' removido(s) com sucesso!");
             } else {
                 System.out.println("Gasto '" + nomeProcurado + "' não foi encontrado.");
             }
