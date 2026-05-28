@@ -59,25 +59,30 @@ public class Main {
             transactions.listarMovimentacao();
             String nomeProcurado = lerTexto("Digite o nome (descrição) do gasto que deseja remover: ");
 
-
             boolean indexProcurado = false;
+
             for (int i = 0; i < transactions.qtdAtual; i++) {
-                if(transactions.historico[i].desc.equalsIgnoreCase(nomeProcurado)) {
+                if (transactions.historico[i].desc.equalsIgnoreCase(nomeProcurado)) {
+
                     indexProcurado = true;
-                    for (int j = i; j < transactions.qtdAtual -1 ; j++) {
-                        transactions.historico[j] = transactions.historico[j+1];
-                        transactions.saldoInicial = transactions.saldoInicial + transactions.historico[j].value;
+                    transactions.saldoInicial = transactions.saldoInicial + transactions.historico[i].value;
+
+                    for (int j = i; j < transactions.qtdAtual - 1; j++) {
+                        transactions.historico[j] = transactions.historico[j + 1];
                     }
+
+                    transactions.historico[transactions.qtdAtual - 1] = null;
+                    transactions.qtdAtual--;
+
+                    break;
                 }
             }
+
             if (indexProcurado) {
-                transactions.historico[transactions.qtdAtual-1] = null;
-                transactions.qtdAtual--;
-                System.out.println("Gasto '" + nomeProcurado + "' removido com sucesso!");
+                System.out.println("Gasto(s) '" + nomeProcurado + "' removido(s) com sucesso!");
             } else {
                 System.out.println("Gasto '" + nomeProcurado + "' não foi encontrado.");
             }
-
         }
     }
 
