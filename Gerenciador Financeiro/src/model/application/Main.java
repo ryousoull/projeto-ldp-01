@@ -1,8 +1,5 @@
 package model.application;
 import model.entities.Movimentacao;
-
-
-import java.util.Locale;
 import java.util.Scanner;
 
 public class Main {
@@ -54,18 +51,16 @@ public class Main {
     public static void cadastroMovimentacao() {
         if (qtdAtual >= LIMITE_TRANSACOES) {
             imprimiTexto("Limite de transações atingido!");
-            return;
+        } else {
+            double value = lerDouble("Valor: ");
+            sc.nextLine();
+            String desc = lerTexto("Descrição: ");
+
+            historico[qtdAtual] = new Movimentacao(value, desc);
+            qtdAtual++;
+            imprimiTexto("Gasto adicionado com sucesso!");
         }
-
-        double value = lerDouble("Valor: ");
-        sc.nextLine();
-        String desc = lerTexto("Descrição: ");
-
-        historico[qtdAtual] = new Movimentacao(value, desc);
-        qtdAtual++;
-        imprimiTexto("Gasto adicionado com sucesso!");
     }
-
 
     public static void exibirMenu() {
         System.out.println("\n--- GERENCIADOR FINANCEIRO ---");
@@ -75,7 +70,6 @@ public class Main {
         System.out.println("4. Remover Gasto por Nome.");
         System.out.println("0. Sair");
         System.out.println("--------------------------------");
-
     }
 
     public static void listarMovimentacao () {
@@ -100,31 +94,30 @@ public class Main {
     public static void removerMovimentacaoPorNome() {
         if (qtdAtual == 0) {
             System.out.println("Nenhum gasto cadastrado para remover.");
-        }
+        } else {
+            System.out.println("Listagem do Extrato para Ver o Nome...");
+            listarMovimentacao();
+            String nomeProcurado = lerTexto("Digite o nome (descrição) do gasto que deseja remover: ");
 
-        System.out.println("Listagem do Extrato para Ver o Nome...");
-        listarMovimentacao();
-        String nomeProcurado = lerTexto("Digite o nome (descrição) do gasto que deseja remover: ");
 
-
-        boolean indexProcurado = false;
-        for (int i = 0; i < qtdAtual; i++) {
-            if(historico[i].desc.equalsIgnoreCase(nomeProcurado)) {
-                indexProcurado = true;
-                for (int j = i; j < qtdAtual -1 ; j++) {
-                    historico[j] = historico[j+1];
+            boolean indexProcurado = false;
+            for (int i = 0; i < qtdAtual; i++) {
+                if(historico[i].desc.equalsIgnoreCase(nomeProcurado)) {
+                    indexProcurado = true;
+                    for (int j = i; j < qtdAtual -1 ; j++) {
+                        historico[j] = historico[j+1];
+                    }
                 }
             }
-        }
-        if (indexProcurado) {
-            historico[qtdAtual-1] = null;
-            qtdAtual--;
-            System.out.println("Gasto '" + nomeProcurado + "' removido com sucesso!");
-        } else {
-            System.out.println("Gasto '" + nomeProcurado + "' não foi encontrado.");
-        }
+            if (indexProcurado) {
+                historico[qtdAtual-1] = null;
+                qtdAtual--;
+                System.out.println("Gasto '" + nomeProcurado + "' removido com sucesso!");
+            } else {
+                System.out.println("Gasto '" + nomeProcurado + "' não foi encontrado.");
+            }
 
-
+        }
     }
 
     public static double lerDouble(String msg) {
@@ -144,7 +137,4 @@ public class Main {
     public static void imprimiTexto(String msg) {
         System.out.println(msg);
     }
-
 }
-
-
