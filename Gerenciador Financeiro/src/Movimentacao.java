@@ -1,25 +1,23 @@
-package model.entities;
-
 public class Movimentacao {
-    public double saldoInicial;
-    public Despesa[] historico;
-    public int qtdAtual;
+     double saldoInicial;
+     Despesa[] historico;
+     int qtdAtual;
 
-    public Movimentacao(double saldoInicial) {
+     Movimentacao(double saldoInicial) {
         this.saldoInicial = saldoInicial;
         this.historico = new Despesa[100];
         this.qtdAtual = 0;
     }
 
-    public void listarMovimentacao () {
+     void listarMovimentacao () {
         System.out.println("\n=====================================");
         for (int i = 0; i < qtdAtual; i++) {
-            historico[i].exibirResumo();
+            System.out.println(historico[i]);
         }
         System.out.println("=====================================");
     }
 
-    public void calcularSaldoTotal() {
+     void calcularSaldoTotal() {
         double total = 0;
         for (int i = 0; i < qtdAtual; i++) {
             total += historico[i].value;

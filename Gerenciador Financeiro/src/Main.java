@@ -1,6 +1,3 @@
-package model.application;
-import model.entities.Despesa;
-import model.entities.Movimentacao;
 import java.util.Scanner;
 
 public class Main {
@@ -36,7 +33,7 @@ public class Main {
     }
 
 
-    public static void cadastroMovimentacao() {
+     static void cadastroMovimentacao() {
         if (transactions.qtdAtual >= transactions.historico.length) {
             imprimiTexto("Limite de transações atingido!");
         } else {
@@ -51,7 +48,7 @@ public class Main {
         }
     }
 
-    public static void removerMovimentacaoPorNome() {
+     static void removerMovimentacaoPorNome() {
         if (transactions.qtdAtual == 0) {
             System.out.println("Nenhum gasto cadastrado para remover.");
         } else {
@@ -86,14 +83,14 @@ public class Main {
         }
     }
 
-    public static void addEntrada () {
+     static void addEntrada () {
         double entrada = lerDouble("Digite o Valor da Entrada: ");
         transactions.saldoInicial = transactions.saldoInicial + entrada;
         imprimiTexto("\nSaldo Atual: " + transactions.saldoInicial);
         imprimiTexto("--------------------------------");
     }
 
-    public static void exibirMenu() {
+    static void exibirMenu() {
         System.out.println("\n--- GERENCIADOR FINANCEIRO ---");
         System.out.println("1. Adicionar Gasto");
         System.out.println("2. Ver Extrato");
@@ -104,21 +101,21 @@ public class Main {
         System.out.println("--------------------------------");
     }
 
-    public static double lerDouble(String msg) {
+    static double lerDouble(String msg) {
         System.out.println(msg);
         return sc.nextDouble();
     }
-    public static int lerInt(String msg) {
+    static int lerInt(String msg) {
         System.out.println(msg);
         return sc.nextInt();
     }
 
-    public static String lerTexto(String msg) {
+    static String lerTexto(String msg) {
         System.out.println(msg);
         return sc.nextLine();
     }
 
-    public static void imprimiTexto(String msg) {
+    static void imprimiTexto(String msg) {
         System.out.println(msg);
     }
 
